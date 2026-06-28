@@ -7,7 +7,7 @@
     <style>
         /* --- Setări de Bază și Variabile --- */
         :root {
-            --primary-color: #f39c12; /* Portocaliu Plasma */
+            --primary-color: #f39c12; 
             --bg-dark: #121212;
             --text-light: #ecf0f1;
             --steel-gray: #7f8c8d;
@@ -25,6 +25,7 @@
             background-color: var(--bg-dark);
             color: var(--text-light);
             line-height: 1.6;
+            overflow-x: hidden; /* Previne scroll-ul orizontal nedorit */
         }
 
         /* --- Bara de Navigație --- */
@@ -33,7 +34,7 @@
             width: 100%;
             top: 0;
             background: rgba(18, 18, 18, 0.95);
-            padding: 20px 50px;
+            padding: 15px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -43,20 +44,25 @@
         }
 
         .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
         }
 
-        .logo span {
-            color: var(--primary-color);
+        .logo img {
+            height: 70px; 
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05); 
         }
 
         nav ul {
             list-style: none;
             display: flex;
+            align-items: center;
         }
 
         nav ul li {
@@ -68,6 +74,7 @@
             color: var(--text-light);
             font-weight: 500;
             transition: color 0.3s ease;
+            font-size: 1rem;
         }
 
         nav ul li a:hover {
@@ -91,13 +98,14 @@
             font-size: 4rem;
             margin-bottom: 20px;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             animation: fadeInDown 1s ease;
+            line-height: 1.2;
         }
 
         .hero p {
-            font-size: 1.5rem;
-            color: var(--steel-gray);
+            font-size: 1.3rem;
+            color: var(--text-light);
             margin-bottom: 40px;
             max-width: 800px;
             animation: fadeInUp 1s ease 0.5s;
@@ -109,7 +117,7 @@
             background-color: transparent;
             color: var(--primary-color);
             border: 2px solid var(--primary-color);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             text-decoration: none;
             text-transform: uppercase;
             font-weight: bold;
@@ -152,15 +160,15 @@
         /* --- Servicii --- */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .service-card {
             background: #1e1e1e;
-            padding: 40px 30px;
+            padding: 40px 25px;
             border-radius: 8px;
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -175,20 +183,15 @@
             transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
-        .service-card:hover {
-            transform: translateY(-10px);
-            border-bottom: 4px solid var(--primary-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
         .service-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-bottom: 15px;
             color: #fff;
         }
 
         .service-card p {
             color: var(--steel-gray);
+            font-size: 0.95rem;
         }
 
         /* --- Contact Form --- */
@@ -212,6 +215,7 @@
             color: #fff;
             border-radius: 4px;
             outline: none;
+            font-size: 1rem;
             transition: border-color 0.3s;
         }
 
@@ -219,7 +223,7 @@
             border-color: var(--primary-color);
         }
 
-        /* --- Animații Keyframes --- */
+        /* --- Animații --- */
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -230,20 +234,90 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- Footer --- */
         footer {
             text-align: center;
-            padding: 30px;
+            padding: 25px 20px;
             background: #0a0a0a;
             color: var(--steel-gray);
             border-top: 1px solid #333;
+            font-size: 0.9rem;
+        }
+
+        /* =========================================
+           RESPONSIVE DESIGN (Optimizare Mobile)
+           ========================================= */
+        @media (max-width: 768px) {
+            header {
+                padding: 10px 15px;
+                flex-direction: column; /* Pune logo-ul sus și meniul sub */
+            }
+
+            .logo img {
+                height: 55px; /* Logo mai compact */
+            }
+
+            nav {
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            nav ul {
+                justify-content: center; /* Centrează butoanele din meniu */
+                flex-wrap: wrap;
+                gap: 10px; /* Spațiu uniform între elemente */
+            }
+
+            nav ul li {
+                margin: 0 5px; /* Margini mai mici pe mobile */
+            }
+
+            nav ul li a {
+                font-size: 0.9rem;
+                padding: 5px;
+            }
+
+            .hero {
+                padding: 0 15px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem; /* Titlu mai mic, nu mai iese din ecran */
+                margin-top: 60px; /* Spațiu pentru bara de navigație de sus */
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+                margin-bottom: 30px;
+            }
+
+            .btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 60px 20px; /* Margini laterale mai mici pe secțiuni */
+            }
+
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+
+            .contact-container {
+                padding: 25px 15px;
+            }
         }
     </style>
 </head>
 <body>
 
     <header id="navbar">
-        <div class="logo">Steel<span>Craft</span></div>
+        <div class="logo">
+            <a href="#acasa">
+                <img src="http://googleusercontent.com/image_generation_content/289" alt="SteelCraft Logo">
+            </a>
+        </div>
         <nav>
             <ul>
                 <li><a href="#acasa">Acasă</a></li>
@@ -255,14 +329,14 @@
     </header>
 
     <section id="acasa" class="hero">
-        <h1>Forjăm Viitorul. Tăiem cu Precizie.</h1>
+        <h1>Forjăm Viitorul.<br>Tăiem cu Precizie.</h1>
         <p>Soluții complete de confecții metalice și debitare CNC cu plasmă la standarde industriale.</p>
         <a href="#contact" class="btn">Solicită o Ofertă</a>
     </section>
 
     <section id="despre">
         <h2 class="section-title">Despre Noi</h2>
-        <div style="max-width: 800px; margin: 0 auto; text-align: center; color: var(--steel-gray); font-size: 1.2rem;">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center; color: var(--steel-gray); font-size: 1.1rem;">
             <p>La SteelCraft, transformăm oțelul brut în componente de înaltă precizie. Utilizăm tehnologie de ultimă generație pentru debitarea CNC cu plasmă, oferind toleranțe stricte și finisaje impecabile. Fie că este vorba de structuri masive sau piese customizate, garantăm rezistență și calitate.</p>
         </div>
     </section>
@@ -308,7 +382,6 @@
     </footer>
 
     <script>
-        // Efect de background pentru bara de navigație la scroll
         window.addEventListener('scroll', () => {
             const header = document.getElementById('navbar');
             if (window.scrollY > 50) {
@@ -320,13 +393,10 @@
             }
         });
 
-        // Interactivitate: Scroll Reveal pentru carduri și formular
         const reveals = document.querySelectorAll('.reveal');
-
         const revealOnScroll = () => {
             const windowHeight = window.innerHeight;
-            const elementVisible = 150;
-
+            const elementVisible = 120;
             reveals.forEach(reveal => {
                 const elementTop = reveal.getBoundingClientRect().top;
                 if (elementTop < windowHeight - elementVisible) {
@@ -336,10 +406,8 @@
         };
 
         window.addEventListener('scroll', revealOnScroll);
-        // Declanșare inițială
-        revealOnScroll();
+        revealOnScroll(); 
 
-        // Validare simplă formular
         document.getElementById('contactForm').addEventListener('submit', (e) => {
             e.preventDefault();
             alert('Mesajul a fost trimis! Echipa SteelCraft te va contacta în scurt timp.');
