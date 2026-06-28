@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SteelCraft - Confectii Metalice & CNC Plasma</title>
+    <style>
+        /* --- Setări de Bază și Variabile --- */
+        :root {
+            --primary-color: #f39c12; /* Portocaliu Plasma */
+            --bg-dark: #121212;
+            --text-light: #ecf0f1;
+            --steel-gray: #7f8c8d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* --- Bara de Navigație --- */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(18, 18, 18, 0.95);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+            transition: 0.3s;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- Secțiunea Hero --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), 
+                        url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2070&auto=format&fit=crop') center/cover;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--steel-gray);
+            margin-bottom: 40px;
+            max-width: 800px;
+            animation: fadeInUp 1s ease 0.5s;
+            animation-fill-mode: both;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            font-size: 1.2rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            animation: fadeInUp 1s ease 0.8s;
+            animation-fill-mode: both;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(243, 156, 18, 0.6);
+        }
+
+        /* --- Secțiuni Generale --- */
+        section {
+            padding: 100px 50px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* --- Servicii --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: #1e1e1e;
+            padding: 40px 30px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-bottom: 4px solid transparent;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .service-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-bottom: 4px solid var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .service-card p {
+            color: var(--steel-gray);
+        }
+
+        /* --- Contact Form --- */
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #1e1e1e;
+            padding: 40px;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: #2c2c2c;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 4px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--primary-color);
+        }
+
+        /* --- Animații Keyframes --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #0a0a0a;
+            color: var(--steel-gray);
+            border-top: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+
+    <header id="navbar">
+        <div class="logo">Steel<span>Craft</span></div>
+        <nav>
+            <ul>
+                <li><a href="#acasa">Acasă</a></li>
+                <li><a href="#despre">Despre Noi</a></li>
+                <li><a href="#servicii">Servicii</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="acasa" class="hero">
+        <h1>Forjăm Viitorul. Tăiem cu Precizie.</h1>
+        <p>Soluții complete de confecții metalice și debitare CNC cu plasmă la standarde industriale.</p>
+        <a href="#contact" class="btn">Solicită o Ofertă</a>
+    </section>
+
+    <section id="despre">
+        <h2 class="section-title">Despre Noi</h2>
+        <div style="max-width: 800px; margin: 0 auto; text-align: center; color: var(--steel-gray); font-size: 1.2rem;">
+            <p>La SteelCraft, transformăm oțelul brut în componente de înaltă precizie. Utilizăm tehnologie de ultimă generație pentru debitarea CNC cu plasmă, oferind toleranțe stricte și finisaje impecabile. Fie că este vorba de structuri masive sau piese customizate, garantăm rezistență și calitate.</p>
+        </div>
+    </section>
+
+    <section id="servicii" style="background: #151515;">
+        <h2 class="section-title">Serviciile Noastre</h2>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <h3>Debitare CNC Plasmă</h3>
+                <p>Tăiere de precizie pentru table de diverse grosimi. Viteză mare de execuție și margini curate pentru orice proiect industrial.</p>
+            </div>
+            <div class="service-card reveal">
+                <h3>Componente Auto & Moto</h3>
+                <p>Proiectare și execuție de piese custom pentru industria auto și motociclete, respectând specificațiile tehnice exacte.</p>
+            </div>
+            <div class="service-card reveal">
+                <h3>Structuri Metalice</h3>
+                <p>Asamblare și sudură profesională pentru confecții metalice complexe, hale industriale și repere arhitecturale.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Contactează-ne</h2>
+        <div class="contact-container reveal">
+            <form id="contactForm">
+                <div class="form-group">
+                    <input type="text" placeholder="Numele tău" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Adresa de Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea rows="5" placeholder="Descrie proiectul tău (dimensiuni, material, cerințe CNC)..." required></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Trimite Mesajul</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 SteelCraft. Toate drepturile rezervate.</p>
+    </footer>
+
+    <script>
+        // Efect de background pentru bara de navigație la scroll
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(10, 10, 10, 0.98)';
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.5)';
+            } else {
+                header.style.background = 'rgba(18, 18, 18, 0.95)';
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        // Interactivitate: Scroll Reveal pentru carduri și formular
+        const reveals = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 150;
+
+            reveals.forEach(reveal => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        // Declanșare inițială
+        revealOnScroll();
+
+        // Validare simplă formular
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Mesajul a fost trimis! Echipa SteelCraft te va contacta în scurt timp.');
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>
